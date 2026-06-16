@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÉBANO PARFUMS — Essence of Distinction</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<style>
+:root {
+  --black-absolute: #0B0B0B;
+  --black-carbon: #1A1A1D;
+  --gold: #C8A35A;
+  --gold-light: #D4B872;
+  --gold-dark: #A8863E;
+  --ivory: #F2EDE6;
+  --steel: #4A4A4F;
+  --font-display: 'Cinzel', serif;
+  --font-body: 'Montserrat', sans-serif;
+  --spacing-section: 120px;
+  --radius-btn: 50px;
+  --transition-smooth: cubic-bezier(0.23, 1, 0.32, 1);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black-absolute);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  font-weight: 300;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Grain overlay */
+#grain {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+#grain::after {
+  content: '';
+  display: block;
+  width: 300%; height: 300%;
+  position: absolute;
+  top: -100%; left: -100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  animation: grainShift 0.3s steps(6) infinite;
+}
+@keyframes grainShift {
+  0% { transform: translate(-10%, -10%); }
+  25% { transform: translate(5%, -15%); }
+  50% { transform: translate(-5%, 10%); }
+  75% { transform: translate(10%, 5%); }
+  100% { transform: translate(-10%, -10%); }
+}
+
+/* ===== NAVIGATION ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 28px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background 0.6s var(--transition-smooth), padding 0.6s var(--transition-smooth), backdrop-filter 0.6s;
+  background: transparent;
+}
+nav.scrolled {
+  background: rgba(11,11,11,0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 16px 48px;
+  border-bottom: 1px solid rgba(200,163,90,0.06);
+}
+.nav-logo { display: block; text-decoration: none; }
+.nav-logo img { display: block; height: 24px; width: auto; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--ivory);
+  text-decoration: none;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.4s var(--transition-smooth);
+  opacity: 0.6;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 1px; background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.4s var(--transition-smooth);
+}
+.nav-links a:hover { opacity: 1; color: var(--gold); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--black-absolute);
+  background: var(--gold);
+  padding: 10px 24px;
+  border-radius: var(--radius-btn);
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: all 0.5s var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+.nav-cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+.nav-cta:hover::before { transform: translateX(100%); }
+.nav-cta:hover { background: var(--gold-light); transform: scale(1.02); box-shadow: 0 0 40px rgba(200,163,90,0.15); }
+.menu-toggle {
+  display: none;
+  background: none; border: none;
+  color: var(--gold); font-size: 22px;
+  cursor: pointer;
+}
+
+/* ===== HERO ===== */
+#hero {
+  position: relative;
+  width: 100%; height: 100vh;
+  background: var(--black-absolute);
+  overflow: hidden;
+  min-height: 600px;
+}
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 45%, transparent 15%, rgba(11,11,11,0.5) 50%, rgba(11,11,11,0.92) 80%, var(--black-absolute) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+#heroCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.18;
+  mix-blend-mode: screen;
+}
+.hero-content {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+}
+/*.hero-logo-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}*/
+.hero-monogram-bg {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(180px, 30vw, 400px);
+  font-weight: 700;
+  color: var(--gold);
+  opacity: 0.03;
+  pointer-events: none;
+  user-select: none;
+  z-index: -1;
+}
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--black-absolute);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.1s;
+}
+.hero-gold-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,163,90,0.1), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+.hero-gold-line.top { top: 0; }
+.hero-gold-line.bottom { bottom: 0; }
+.hero-logo-img {
+  display: block;
+  max-width: clamp(280px, 45vw, 600px);
+  height: auto;
+  width: 100%;
+}
+.hero-tagline {
+  font-family: var(--font-body);
+  font-size: clamp(11px, 1.4vh, 14px);
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  color: var(--ivory);
+  opacity: 0;
+  margin-top: 32px;
+  transform: translateY(15px);
+  position: relative;
+  z-index: 1;
+}
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: clamp(13px, 1.8vh, 18px);
+  font-weight: 300;
+  color: var(--ivory);
+  opacity: 0;
+  margin-top: 28px;
+  text-align: center;
+  max-width: 640px;
+  padding: 0 24px;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+.hero-desc {
+  font-family: var(--font-body);
+  font-size: clamp(12px, 1.5vh, 15px);
+  font-weight: 300;
+  color: var(--ivory);
+  opacity: 0.55;
+  margin-top: 14px;
+  text-align: center;
+  max-width: 560px;
+  padding: 0 24px;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+.hero-cta {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--black-absolute);
+  background: var(--gold);
+  padding: 14px 36px;
+  border-radius: var(--radius-btn);
+  text-decoration: none;
+  margin-top: 32px;
+  transition: all 0.5s var(--transition-smooth);
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+}
+.hero-cta:hover { background: var(--gold-light); transform: scale(1.03); box-shadow: 0 0 40px rgba(200,163,90,0.2); }
+
+/* Gold glow accent behind monogram */
+.hero-glow {
+  position: absolute;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,163,90,0.08) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Gold constellation dots */
+.hero-stars {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-star {
+  position: absolute;
+  width: 2px; height: 2px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0;
+  box-shadow: 0 0 4px rgba(200,163,90,0.4), 0 0 12px rgba(200,163,90,0.1);
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+}
+.scroll-indicator span {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ivory);
+  opacity: 0.4;
+}
+.scroll-line {
+  width: 1px; height: 32px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(0.3); transform-origin: top; opacity: 0.3; }
+  50% { transform: scaleY(1); transform-origin: top; opacity: 0.8; }
+}
+
+/* ===== SECTIONS GENERAL ===== */
+.section {
+  position: relative;
+  padding: var(--spacing-section) 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.section-dark { background: var(--black-absolute); }
+.section-carbon { background: var(--black-carbon); }
+.section-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.section-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 600;
+  color: var(--ivory);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+.section-title .gold { color: var(--gold); }
+.collection-sub {
+  font-family: var(--font-body);
+  font-size: clamp(13px, 1.3vw, 16px);
+  font-weight: 300;
+  color: var(--ivory);
+  opacity: 0.5;
+  max-width: 600px;
+  margin: 20px auto 0;
+  line-height: 1.7;
+}
+
+/* ===== HISTORY ===== */
+#historia {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  padding: var(--spacing-section) 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+}
+.history-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid rgba(200,163,90,0.06);
+}
+.history-image-inner {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--black-carbon) 0%, #2a2418 50%, var(--black-carbon) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.history-image-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 70%, rgba(200,163,90,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 30%, rgba(200,163,90,0.03) 0%, transparent 50%);
+}
+.history-image-inner::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,163,90,0.15), transparent);
+}
+.history-tree-svg {
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 80%; height: 90%;
+  opacity: 0.15;
+}
+.history-tree-svg path, .history-tree-svg ellipse { stroke: var(--gold); }
+.history-text h2 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.5vw, 42px);
+  font-weight: 600;
+  color: var(--ivory);
+  line-height: 1.15;
+  margin-bottom: 28px;
+}
+.history-text h2 em {
+  font-style: normal;
+  color: var(--gold);
+}
+.history-text p {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.1vw, 16px);
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--ivory);
+  opacity: 0.6;
+  letter-spacing: 0.01em;
+}
+.history-separator {
+  width: 60px; height: 1px;
+  background: var(--gold);
+  margin: 32px 0;
+  opacity: 0.3;
+}
+
+/* ===== COLLECTION ===== */
+#coleccion {
+  padding: var(--spacing-section) 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.product-card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(26,26,29,0.6) 0%, rgba(26,26,29,0.2) 100%);
+  border: 1px solid rgba(200,163,90,0.06);
+  border-radius: 16px;
+  padding: 48px 28px 40px;
+  text-align: center;
+  transition: all 0.8s var(--transition-smooth);
+  cursor: pointer;
+  overflow: hidden;
+}
+.product-card.product-card--has-photo {
+  overflow: hidden;
+  padding-top: 0;
+}
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,163,90,0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.6s var(--transition-smooth);
+}
+.product-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 100%, rgba(200,163,90,0.05) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.6s var(--transition-smooth);
+}
+.product-card:hover::before { opacity: 1; }
+.product-card:hover::after { opacity: 1; }
+.product-card:hover {
+  border-color: rgba(200,163,90,0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(200,163,90,0.05);
+}
+.product-card-image { width: 180px; height: 240px; margin: 0 auto 28px; position: relative; overflow: hidden; border-radius: 10px; }
+.product-card-image svg { width: 100%; height: 100%; }
+.product-card-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(200,163,90,0.12);
+  transition: transform 1.2s var(--transition-smooth), filter 0.8s var(--transition-smooth);
+  filter: saturate(0.9) brightness(0.95);
+}
+.product-card:hover .product-card-image img {
+  transform: scale(1.06);
+  filter: saturate(1) brightness(1.05);
+}
+.product-card-image--photo {
+  width: calc(100% - 24px);
+  height: auto;
+  aspect-ratio: 4 / 5;
+  margin: 12px auto 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid rgba(200,163,90,0.18);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+.product-card-image--photo::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 150px;
+  background: linear-gradient(to top, rgba(11,11,11,1) 0%, rgba(11,11,11,1) 25%, rgba(11,11,11,0.7) 55%, rgba(11,11,11,0.2) 80%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 0 0 10px 10px;
+}
+.product-card-image--photo img {
+  border-radius: 0;
+  border: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+.product-card:hover .product-card-image--photo img {
+  transform: scale(1.04);
+  filter: saturate(1) brightness(1.05);
+}
+.product-card-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ivory);
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+.product-card-family {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+.product-card-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--ivory);
+  opacity: 0.45;
+}
+.product-card-accent {
+  width: 24px; height: 1px;
+  background: var(--gold);
+  margin: 20px auto 0;
+  opacity: 0.15;
+  border-radius: 2px;
+  transition: opacity 0.4s var(--transition-smooth), width 0.4s var(--transition-smooth);
+}
+.product-card:hover .product-card-accent { opacity: 0.5; width: 48px; }
+
+/* ===== MAYORISTAS ===== */
+#mayoristas {
+  padding: var(--spacing-section) 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+}
+.mayoristas-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.mayoristas-text p {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.2vw, 16px);
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--ivory);
+  opacity: 0.6;
+}
+.mayoristas-cta {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--black-absolute);
+  background: var(--gold);
+  padding: 14px 36px;
+  border-radius: var(--radius-btn);
+  text-decoration: none;
+  transition: all 0.5s var(--transition-smooth);
+}
+.mayoristas-cta:hover { background: var(--gold-light); transform: scale(1.03); box-shadow: 0 0 30px rgba(200,163,90,0.15); }
+.mayoristas-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.benefit-card {
+  font-family: var(--font-body);
+  font-size: clamp(13px, 1.1vw, 15px);
+  font-weight: 300;
+  color: var(--ivory);
+  opacity: 0.7;
+  padding: 16px 24px;
+  border: 1px solid rgba(200,163,90,0.08);
+  border-radius: 12px;
+  transition: all 0.4s var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.benefit-card:hover {
+  border-color: rgba(200,163,90,0.2);
+  background: rgba(200,163,90,0.03);
+  opacity: 1;
+}
+.benefit-icon {
+  color: var(--gold);
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+/* ===== EXCLUSIVITY ===== */
+#exclusividad {
+  padding: var(--spacing-section) 48px;
+  background: var(--black-carbon);
+  position: relative;
+  overflow: hidden;
+}
+#exclusividad::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(200,163,90,0.015) 0%, transparent 50%);
+  pointer-events: none;
+}
+.exclusivity-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+.exclusivity-card {
+  text-align: center;
+  padding: 48px 20px 40px;
+  border: 1px solid rgba(200,163,90,0.06);
+  border-radius: 12px;
+  transition: all 0.6s var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+.exclusivity-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,163,90,0.08), transparent);
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+.exclusivity-card:hover::before { opacity: 1; }
+.exclusivity-card:hover {
+  border-color: rgba(200,163,90,0.12);
+  background: rgba(200,163,90,0.02);
+}
+.exclusivity-icon { width: 36px; height: 36px; margin: 0 auto 24px; color: var(--gold); opacity: 0.5; }
+.exclusivity-number {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.exclusivity-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--ivory);
+  opacity: 0.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ===== EXCLUSIVIDAD CONTENT ===== */
+.exclusividad-content {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 60px;
+}
+.exclusividad-text {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.3vw, 17px);
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--ivory);
+  opacity: 0.55;
+}
+
+/* ===== CONTACT ===== */
+#contacto {
+  padding: 100px 48px 120px;
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+}
+.contacto-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 60%, rgba(200,163,90,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.contacto-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(200,163,90,0.06);
+  pointer-events: none;
+  animation: pulseRing 4s ease-in-out infinite;
+}
+@keyframes pulseRing {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.1; }
+}
+.contacto-chat-icon {
+  margin: 0 auto 24px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.contacto-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 600;
+  color: var(--ivory);
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+.contacto-text {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.2vw, 16px);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--ivory);
+  opacity: 0.55;
+  margin-bottom: 20px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.contacto-info {
+  margin-bottom: 40px;
+}
+.contacto-location {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--ivory);
+  opacity: 0.4;
+  letter-spacing: 0.02em;
+}
+.contacto-wa-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  max-width: 380px;
+  margin: 0 auto;
+  padding: 32px 40px 28px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(37,211,102,0.06) 0%, rgba(37,211,102,0.02) 100%);
+  border: 1px solid rgba(37,211,102,0.15);
+  text-decoration: none;
+  transition: all 0.5s var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.contacto-wa-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(37,211,102,0.3), transparent);
+}
+.contacto-wa-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 100%, rgba(37,211,102,0.04) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+.contacto-wa-card:hover::after { opacity: 1; }
+.contacto-wa-card:hover {
+  border-color: rgba(37,211,102,0.3);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(37,211,102,0.08);
+}
+.wa-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(37,211,102,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #25D366;
+  margin-bottom: 12px;
+  transition: all 0.4s;
+}
+.contacto-wa-card:hover .wa-card-icon {
+  background: #25D366;
+  color: white;
+  box-shadow: 0 0 30px rgba(37,211,102,0.2);
+}
+.wa-card-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wa-card-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: #25D366;
+  letter-spacing: 0.02em;
+}
+.wa-card-arrow {
+  font-size: 20px;
+  color: #25D366;
+  opacity: 0.5;
+  transition: transform 0.4s;
+}
+.contacto-wa-card:hover .wa-card-arrow {
+  transform: translateX(6px);
+  opacity: 1;
+}
+.wa-card-response {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--ivory);
+  opacity: 0.35;
+  margin-top: 4px;
+}
+
+/* ===== WHATSAPP FLOAT ===== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9998;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+  transition: all 0.4s var(--transition-smooth);
+  opacity: 0;
+  transform: scale(0.8);
+  animation: whatsappIn 0.6s ease forwards 2s;
+}
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(37,211,102,0.4);
+  background: #22c35e;
+}
+@keyframes whatsappIn {
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--black-absolute);
+  border-top: 1px solid rgba(200,163,90,0.05);
+  padding: 80px 48px 32px;
+}
+.footer-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+.footer-brand .footer-logo { margin-bottom: 16px; }
+.footer-brand .footer-logo img { height: 32px; width: auto; display: block; }
+.footer-brand p {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--ivory);
+  opacity: 0.3;
+  max-width: 280px;
+}
+.footer-location {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--gold);
+  opacity: 0.4;
+  margin-top: 12px;
+  letter-spacing: 0.03em;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--black-absolute);
+  border-top: 1px solid rgba(200,163,90,0.05);
+  padding: 80px 48px 32px;
+}
+.footer-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+.footer-brand .footer-logo { margin-bottom: 16px; }
+.footer-brand .footer-logo img { height: 32px; width: auto; display: block; }
+.footer-brand p {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--ivory);
+  opacity: 0.3;
+  max-width: 280px;
+}
+.footer-col h4 {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.footer-col a {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--ivory);
+  opacity: 0.35;
+  text-decoration: none;
+  margin-bottom: 12px;
+  transition: color 0.3s var(--transition-smooth);
+}
+.footer-col a:hover { color: var(--gold); opacity: 1; }
+.footer-bottom {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-top: 32px;
+  border-top: 1px solid rgba(200,163,90,0.04);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-bottom span {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--ivory);
+  opacity: 0.2;
+  letter-spacing: 0.03em;
+}
+.footer-socials { display: flex; gap: 24px; }
+.footer-socials a {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--ivory);
+  opacity: 0.25;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  transition: color 0.3s var(--transition-smooth);
+}
+.footer-socials a:hover { color: var(--gold); opacity: 1; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 968px) {
+  .nav-links { display: none; }
+  .menu-toggle { display: block; }
+  #historia { grid-template-columns: 1fr; gap: 48px; }
+  .collection-grid { grid-template-columns: 1fr; gap: 20px; }
+  .mayoristas-content { grid-template-columns: 1fr; gap: 40px; }
+  .exclusivity-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+@media (max-width: 640px) {
+  nav { padding: 20px 24px; }
+  nav.scrolled { padding: 14px 24px; }
+  .section { padding: 80px 24px; }
+  #historia { padding: 80px 24px; }
+  #coleccion { padding: 80px 24px; }
+  #mayoristas { padding: 80px 24px; }
+  .mayoristas-content { grid-template-columns: 1fr; gap: 32px; }
+  #exclusividad { padding: 80px 24px; }
+  #contacto { padding: 60px 24px 80px; }
+  .contacto-wa-card { padding: 24px 24px 20px; }
+  footer { padding: 60px 24px 24px; }
+  .exclusivity-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .newsletter-form { flex-direction: column; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div id="grain"></div>
+
+<!-- ===== NAVIGATION ===== -->
+<nav id="nav">
+  <a href="#" class="nav-logo"><img src="favicon.png" alt="ÉBANO PARFUMS"></a>
+  <ul class="nav-links">
+    <li><a href="#historia">Sobre Nosotros</a></li>
+    <li><a href="#coleccion">Catálogo</a></li>
+    <li><a href="#mayoristas">Mayoristas</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Contactar</a>
+  <button class="menu-toggle" aria-label="Menú">✕</button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-bg-img">
+    <img src="gif.gif" alt="" class="hero-img">
+  </div>
+  <div class="hero-overlay"></div>
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-gold-line top"></div>
+  <div class="hero-gold-line bottom"></div>
+  <div class="hero-stars" id="heroStars"></div>
+  <div class="hero-scrim" id="heroScrim"></div>
+
+  <div class="hero-content">
+    <div class="hero-glow" id="heroGlow"></div>
+    <div class="hero-monogram-bg" id="heroMonogramBg">É</div>
+    <div class="hero-logo-wrapper" id="heroLogoWrapper">
+      <img src="logo.png" alt="ÉBANO PARFUMS" class="hero-logo-img" id="heroLogo">
+    </div>
+    <div class="hero-sub">Perfumes originales para quienes valoran la autenticidad, la elegancia y la calidad.</div>
+    <div class="hero-desc">Especialistas en la venta de fragancias originales al detalle y al por mayor. Trabajamos con una cuidada selección de perfumes internacionales para ofrecer a nuestros clientes productos auténticos y experiencias memorables.</div>
+    <a href="#coleccion" class="hero-cta">Explorar Catálogo</a>
+  </div>
+
+  <div class="scroll-indicator" id="scrollIndicator">
+    <span>Descubre</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ===== HISTORY ===== -->
+<section id="historia">
+  <div class="history-image" id="historyImage">
+    <div class="history-image-inner" id="historyImageInner">
+      <svg class="history-tree-svg" viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 380 L100 180" stroke-width="3" opacity="0.3"/>
+        <path d="M100 280 L55 220" stroke-width="2" opacity="0.25"/>
+        <path d="M100 280 L145 220" stroke-width="2" opacity="0.25"/>
+        <path d="M100 230 L65 170" stroke-width="1.5" opacity="0.2"/>
+        <path d="M100 230 L135 170" stroke-width="1.5" opacity="0.2"/>
+        <path d="M100 200 L75 140" stroke-width="1" opacity="0.15"/>
+        <path d="M100 200 L125 140" stroke-width="1" opacity="0.15"/>
+        <path d="M100 180 L90 110" stroke-width="1" opacity="0.12"/>
+        <path d="M100 180 L110 110" stroke-width="1" opacity="0.12"/>
+        <ellipse cx="100" cy="120" rx="45" ry="40" stroke-width="0.5" opacity="0.08" fill="none"/>
+        <ellipse cx="100" cy="120" rx="60" ry="50" stroke-width="0.3" opacity="0.05" fill="none"/>
+      </svg>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0.03;">
+        <span style="font-family:var(--font-display);font-size:200px;color:var(--gold);font-weight:700;">É</span>
+      </div>
+    </div>
+  </div>
+  <div class="history-text" id="historyText">
+    <div class="section-label">Sobre Nosotros</div>
+    <h2>Tu destino para <em>fragancias originales</em></h2>
+    <div class="history-separator"></div>
+    <p>Ébano Parfums nace con la visión de acercar al mercado una selección de perfumes originales de las marcas más reconocidas internacionalmente.</p>
+    <br>
+    <p>Nos especializamos tanto en ventas al detalle como en distribución mayorista, ofreciendo a nuestros clientes acceso a fragancias auténticas, excelente servicio y precios competitivos.</p>
+    <br>
+    <p>Nuestro compromiso es construir relaciones duraderas basadas en la confianza, la transparencia y la calidad de cada producto que comercializamos.</p>
+  </div>
+</section>
+
+<!-- ===== COLLECTION ===== -->
+<section id="coleccion">
+  <div class="section-header" id="collectionHeader">
+    <div class="section-label">Catálogo</div>
+    <h2 class="section-title">Descubre nuestra <span class="gold">selección</span></h2>
+    <p class="collection-sub">Explora una amplia variedad de perfumes masculinos, femeninos y unisex cuidadosamente seleccionados para satisfacer todos los gustos y ocasiones.</p>
+  </div>
+  <div class="collection-grid">
+    <div class="product-card product-card--has-photo" data-index="0">
+      <div class="product-card-image product-card-image--photo">
+        <img src="fraganciasHombres.jpg" alt="Fragancias Masculinas — Asad Lattafa, Fakhar y más" loading="lazy">
+      </div>
+      <div class="product-card-name">FRAGANCIAS MASCULINAS</div>
+      <div class="product-card-family">Elegancia y carácter</div>
+      <div class="product-card-desc">Perfumes diseñados para hombres que buscan proyectar seguridad, presencia y sofisticación en cada momento.</div>
+      <div class="product-card-accent"></div>
+    </div>
+    <div class="product-card product-card--has-photo" data-index="1">
+      <div class="product-card-image product-card-image--photo">
+        <img src="fragancias-damas.png" alt="Fragancias Femeninas — Good Girl, J'adore Dior, Japanese Cherry Blossom y más" loading="lazy">
+      </div>
+      <div class="product-card-name">FRAGANCIAS FEMENINAS</div>
+      <div class="product-card-family">Belleza y distinción</div>
+      <div class="product-card-desc">Aromas delicados, intensos y memorables para mujeres que desean expresar su personalidad única.</div>
+      <div class="product-card-accent"></div>
+    </div>
+    <div class="product-card" data-index="2">
+      <div class="product-card-image">
+        <svg viewBox="0 0 100 180" fill="none">
+          <rect x="25" y="25" width="50" height="130" rx="10" fill="#1A1A1D" stroke="#C8A35A" stroke-width="0.4" opacity="0.4"/>
+          <rect x="28" y="28" width="44" height="124" rx="8" fill="url(#grad3)" opacity="0.2"/>
+          <rect x="38" y="15" width="24" height="14" rx="4" fill="#1A1A1D" stroke="#C8A35A" stroke-width="0.3" opacity="0.3"/>
+          <circle cx="50" cy="33" r="5" fill="#C8A35A" opacity="0.12"/>
+          <line x1="35" y1="155" x2="65" y2="155" stroke="#C8A35A" stroke-width="0.3" opacity="0.15"/>
+          <rect x="40" y="95" width="20" height="1" fill="#C8A35A" opacity="0.08"/>
+          <line x1="45" y1="160" x2="45" y2="168" stroke="#C8A35A" stroke-width="0.3" opacity="0.12"/>
+          <line x1="50" y1="160" x2="50" y2="170" stroke="#C8A35A" stroke-width="0.3" opacity="0.12"/>
+          <line x1="55" y1="160" x2="55" y2="167" stroke="#C8A35A" stroke-width="0.3" opacity="0.12"/>
+          <defs>
+            <linearGradient id="grad3" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#C8A35A" stop-opacity="0.22"/>
+              <stop offset="50%" stop-color="#C8A35A" stop-opacity="0.05"/>
+              <stop offset="100%" stop-color="#C8A35A" stop-opacity="0.14"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="product-card-name">FRAGANCIAS UNISEX</div>
+      <div class="product-card-family">Versatilidad sin límites</div>
+      <div class="product-card-desc">Composiciones modernas y equilibradas que trascienden géneros y se adaptan a cualquier estilo.</div>
+      <div class="product-card-accent"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAYORISTAS ===== -->
+<section id="mayoristas">
+  <div class="section-header" id="mayoristasHeader">
+    <div class="section-label">Ventas al por Mayor</div>
+    <h2 class="section-title">Soluciones para <span class="gold">negocios</span></h2>
+  </div>
+  <div class="mayoristas-content">
+    <div class="mayoristas-text" id="mayoristasText">
+      <p>Trabajamos con emprendedores, distribuidores, tiendas y revendedores que buscan acceso a perfumes originales en volumen.</p>
+      <br>
+      <p>Ofrecemos atención personalizada, disponibilidad de inventario y condiciones especiales para compras mayoristas.</p>
+      <br>
+      <a href="#contacto" class="mayoristas-cta">Solicitar Información</a>
+    </div>
+    <div class="mayoristas-benefits" id="mayoristasBenefits">
+      <div class="benefit-card" data-index="0"><span class="benefit-icon">◆</span> Productos originales</div>
+      <div class="benefit-card" data-index="1"><span class="benefit-icon">◆</span> Precios competitivos</div>
+      <div class="benefit-card" data-index="2"><span class="benefit-icon">◆</span> Atención personalizada</div>
+      <div class="benefit-card" data-index="3"><span class="benefit-icon">◆</span> Amplio catálogo</div>
+      <div class="benefit-card" data-index="4"><span class="benefit-icon">◆</span> Soporte para distribuidores</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXCLUSIVITY ===== -->
+<section id="exclusividad">
+  <div class="section-header" id="exclusividadHeader">
+    <div class="section-label">Nuestro Compromiso</div>
+    <h2 class="section-title">Autenticidad y <span class="gold">confianza</span></h2>
+  </div>
+  <div class="exclusividad-content" id="exclusividadContent">
+    <p class="exclusividad-text">En Ébano Parfums creemos que cada cliente merece la tranquilidad de adquirir productos genuinos. Por eso trabajamos con proveedores confiables y mantenemos altos estándares de calidad en cada fragancia que ofrecemos.</p>
+  </div>
+  <div class="exclusivity-grid">
+    <div class="exclusivity-card" data-index="0">
+      <div class="exclusivity-icon">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M20 4v32M4 20h32" opacity="0.4"/>
+          <path d="M12 20l6 6 10-10" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+        </svg>
+      </div>
+      <div class="exclusivity-label">Productos 100% Originales</div>
+    </div>
+    <div class="exclusivity-card" data-index="1">
+      <div class="exclusivity-icon">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="20" cy="20" r="16"/>
+          <path d="M20 12v8l6 4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="exclusivity-label">Envíos Rápidos y Seguros</div>
+    </div>
+    <div class="exclusivity-card" data-index="2">
+      <div class="exclusivity-icon">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="20" cy="20" r="18"/>
+          <path d="M14 20l4 4 8-8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="exclusivity-label">Atención Personalizada</div>
+    </div>
+    <div class="exclusivity-card" data-index="3">
+      <div class="exclusivity-icon">
+        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+          <rect x="8" y="12" width="24" height="20" rx="3"/>
+          <path d="M14 12V8a2 2 0 012-2h8a2 2 0 012 2v4" stroke-linejoin="round"/>
+          <path d="M18 22l2 2 4-4" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="exclusivity-label">Precios Mayoristas</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contacto">
+  <div class="contacto-bg"></div>
+  <div class="contacto-pulse" id="contactoPulse"></div>
+  <div id="contactoContent">
+    <div class="contacto-chat-icon" id="chatIcon">
+      <svg viewBox="0 0 48 48" fill="none" width="48" height="48">
+        <rect x="4" y="8" width="40" height="28" rx="6" stroke="#C8A35A" stroke-width="1.2" fill="none" opacity="0.3"/>
+        <path d="M4 32l10-4h30" stroke="#C8A35A" stroke-width="1.2" opacity="0.2"/>
+        <circle cx="24" cy="22" r="2" fill="#C8A35A" opacity="0.8"/>
+        <circle cx="16" cy="22" r="2" fill="#C8A35A" opacity="0.4"/>
+        <circle cx="32" cy="22" r="2" fill="#C8A35A" opacity="0.4"/>
+      </svg>
+    </div>
+    <h2 class="contacto-title">Hablemos</h2>
+    <p class="contacto-text">¿Buscas perfumes para tu uso personal o deseas adquirir productos al por mayor?<br>Nuestro equipo está listo para ayudarte.</p>
+    <div class="contacto-info">
+      <div class="contacto-location">✦ La Altagracia, República Dominicana</div>
+    </div>
+    <a href="https://wa.link/i0n633" target="_blank" rel="noopener" class="contacto-wa-card" id="waCard">
+      <div class="wa-card-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+      </div>
+      <div class="wa-card-text">
+        <span class="wa-card-title">Escríbenos por WhatsApp</span>
+        <span class="wa-card-arrow">→</span>
+      </div>
+      <div class="wa-card-response">Respuesta en minutos ⚡</div>
+    </a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footerEl">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo"><img src="logo.png" alt="ÉBANO PARFUMS"></div>
+      <p>Elegancia en cada fragancia. Perfumes originales al detalle y al por mayor.</p>
+      <div class="footer-location">✦ La Altagracia, República Dominicana</div>
+    </div>
+    <div class="footer-col">
+      <h4>Explorar</h4>
+      <a href="#historia">Sobre Nosotros</a>
+      <a href="#coleccion">Catálogo</a>
+      <a href="#mayoristas">Mayoristas</a>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <a href="#">Atención al Cliente</a>
+      <a href="#">Envíos</a>
+      <a href="#">Devoluciones</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="#">Términos y Condiciones</a>
+      <a href="#">Política de Privacidad</a>
+      <a href="#">Cookies</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 ÉBANO PARFUMS. Todos los derechos reservados.</span>
+    <div class="footer-socials">
+      <a href="#" target="_blank">Instagram</a>
+      <a href="#" target="_blank">Facebook</a>
+      <a href="#" target="_blank">Pinterest</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== WHATSAPP FLOATING ===== -->
+<a href="https://wa.link/i0n633" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+// ===== ANIME.JS HERO ANIMATION =====
+function animateHero() {
+  const tl = anime.timeline({ easing: 'easeOutExpo' });
+
+  tl.add({
+    targets: '#heroLogoWrapper',
+    opacity: [0, 1],
+    scale: { value: [0.85, 1], easing: 'easeOutExpo', duration: 1400 },
+    duration: 1200,
+  })
+  .add({
+    targets: '.hero-sub',
+    opacity: [0, 1],
+    translateY: [15, 0],
+    duration: 1000,
+    offset: '-=200',
+  })
+  .add({
+    targets: '.hero-desc',
+    opacity: [0, 1],
+    translateY: [12, 0],
+    duration: 1000,
+    offset: '-=150',
+  })
+  .add({
+    targets: '.hero-cta',
+    opacity: [0, 1],
+    translateY: [10, 0],
+    duration: 800,
+    offset: '-=100',
+  })
+  .add({
+    targets: '#scrollIndicator',
+    opacity: [0, 1],
+    translateY: [10, 0],
+    duration: 800,
+    offset: '-=100',
+  });
+
+  // Monogram bg ambient glow pulse
+  anime({
+    targets: '#heroGlow',
+    scale: { value: [1, 1.15], duration: 2500, easing: 'easeInOutSine' },
+    opacity: { value: [0.4, 0.8], duration: 2500, easing: 'easeInOutSine' },
+    direction: 'alternate',
+    loop: true,
+    easing: 'easeInOutSine',
+    delay: 2000,
+  });
+
+  // Logo gold shimmer sweep
+  anime({
+    targets: '#heroLogoWrapper',
+    filter: [
+      'drop-shadow(0 0 60px rgba(200,163,90,0.2)) drop-shadow(0 0 120px rgba(200,163,90,0.08))',
+      'drop-shadow(0 0 80px rgba(200,163,90,0.35)) drop-shadow(0 0 160px rgba(200,163,90,0.15))',
+      'drop-shadow(0 0 60px rgba(200,163,90,0.2)) drop-shadow(0 0 120px rgba(200,163,90,0.08))',
+    ],
+    duration: 4000,
+    direction: 'alternate',
+    loop: true,
+    easing: 'easeInOutSine',
+    delay: 3000,
+  });
+
+  // Gold constellation twinkle
+  anime({
+    targets: '.hero-star',
+    opacity: [
+      { value: 0, duration: 0 },
+      { value: 0.7, duration: 500 },
+      { value: 0.15, duration: 900 },
+      { value: 0.5, duration: 700 },
+      { value: 0, duration: 500 },
+    ],
+    delay: anime.stagger(300, { from: 'random' }),
+    loop: true,
+    easing: 'linear',
+  });
+}
+
+// Generate gold stars
+function generateStars() {
+  const container = document.getElementById('heroStars');
+  const count = 25;
+  for (let i = 0; i < count; i++) {
+    const star = document.createElement('div');
+    star.className = 'hero-star';
+    star.style.left = (Math.random() * 96 + 2) + '%';
+    star.style.top = (Math.random() * 96 + 2) + '%';
+    const size = 1 + Math.random() * 2;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    container.appendChild(star);
+  }
+}
+
+// ===== SCROLL REVEALS WITH ANIME.JS =====
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+
+    if (el.id === 'historyImage') {
+      anime({ targets: el, opacity: [0, 1], translateX: [-40, 0], duration: 1000, easing: 'easeOutExpo' });
+    }
+    if (el.id === 'historyText') {
+      anime({ targets: el, opacity: [0, 1], translateX: [40, 0], duration: 1000, easing: 'easeOutExpo' });
+    }
+    if (el.id === 'historyImageInner') {
+      const paths = el.querySelectorAll('.history-tree-svg path, .history-tree-svg ellipse');
+      paths.forEach(p => p.setAttribute('stroke-dasharray', p.getTotalLength ? p.getTotalLength().toString() : '300'));
+      anime({
+        targets: paths,
+        strokeDashoffset: [anime.setDashoffset, 0],
+        duration: 2500,
+        delay: anime.stagger(80),
+        easing: 'easeOutExpo',
+      });
+    }
+    if (el.id === 'collectionHeader') {
+      anime({
+        targets: el.querySelectorAll('.section-label, .section-title'),
+        opacity: [0, 1], translateY: [30, 0],
+        delay: anime.stagger(200), duration: 800,
+        easing: 'easeOutExpo',
+      });
+    }
+    if (el.classList.contains('product-card')) {
+      anime({
+        targets: el, opacity: [0, 1], translateY: [50, 0],
+        duration: 800, delay: parseInt(el.dataset.index) * 150,
+        easing: 'easeOutExpo',
+      });
+    }
+    if (el.id === 'exclusividadContent') {
+      anime({ targets: el, opacity: [0, 1], translateY: [30, 0], duration: 800, easing: 'easeOutExpo' });
+    }
+    if (el.classList.contains('exclusivity-card')) {
+      anime({
+        targets: el, opacity: [0, 1], translateY: [40, 0],
+        duration: 800, delay: parseInt(el.dataset.index) * 120,
+        easing: 'easeOutExpo',
+      });
+    }
+    if (el.id === 'mayoristasHeader') {
+      anime({
+        targets: el.querySelectorAll('.section-label, .section-title'),
+        opacity: [0, 1], translateY: [30, 0],
+        delay: anime.stagger(200), duration: 800,
+        easing: 'easeOutExpo',
+      });
+    }
+    if (el.id === 'mayoristasText') {
+      anime({ targets: el, opacity: [0, 1], translateX: [-30, 0], duration: 800, easing: 'easeOutExpo' });
+    }
+    if (el.id === 'mayoristasBenefits') {
+      anime({
+        targets: el.querySelectorAll('.benefit-card'),
+        opacity: [0, 1], translateX: [30, 0],
+        delay: anime.stagger(100), duration: 600,
+        easing: 'easeOutExpo',
+      });
+    }
+    if (el.id === 'contactoContent') {
+      anime({
+        targets: ['#chatIcon', '.contacto-title', '.contacto-text', '.contacto-info', '#waCard'],
+        opacity: [0, 1],
+        translateY: [30, 0],
+        delay: anime.stagger(150),
+        duration: 800,
+        easing: 'easeOutExpo',
+      });
+    }
+    if (el.id === 'footerEl') {
+      anime({
+        targets: el.querySelectorAll('.footer-grid > div, .footer-bottom'),
+        opacity: [0, 1], translateY: [20, 0],
+        delay: anime.stagger(100), duration: 800,
+        easing: 'easeOutExpo',
+      });
+    }
+
+    sectionObserver.unobserve(el);
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+// ===== PRODUCT CARD HOVER =====
+document.querySelectorAll('.product-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    anime({
+      targets: card.querySelector('.product-card-accent'),
+      width: [24, 48], opacity: [0.15, 0.5],
+      duration: 400, easing: 'easeOutExpo',
+    });
+  });
+  card.addEventListener('mouseleave', () => {
+    anime({
+      targets: card.querySelector('.product-card-accent'),
+      width: [48, 24], opacity: [0.5, 0.15],
+      duration: 400, easing: 'easeOutExpo',
+    });
+  });
+});
+
+// ===== NAV SCROLL =====
+const nav = document.getElementById('nav');
+const hero = document.getElementById('hero');
+const scrim = document.getElementById('heroScrim');
+
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+  if (scrim) {
+    const hh = hero.offsetHeight;
+    const sc = Math.max(0, Math.min(1, (window.scrollY - hh*0.5) / (hh*0.7)));
+    scrim.style.opacity = sc;
+  }
+}, { passive: true });
+
+// ===== OBSERVE ALL =====
+document.querySelectorAll('#historyImage, #historyText, #historyImageInner, #collectionHeader, .product-card, #mayoristasHeader, #mayoristasText, #mayoristasBenefits, .exclusivity-card, #exclusividadContent, #contactoContent, #footerEl').forEach(el => {
+  sectionObserver.observe(el);
+});
+
+// ===== TREE CANVAS =====
+const treeCanvas = document.getElementById('heroCanvas');
+const treeCtx = treeCanvas ? treeCanvas.getContext('2d') : null;
+const treeImg = new Image();
+let treeImgLoaded = false;
+let treeGlow = 0;
+let treeGlowDir = 1;
+
+treeImg.onload = () => { treeImgLoaded = true; };
+treeImg.src = 'tree.png';
+
+function resizeCanvas() {
+  if (!treeCanvas) return;
+  treeCanvas.width = treeCanvas.offsetWidth * (window.devicePixelRatio || 1);
+  treeCanvas.height = treeCanvas.offsetHeight * (window.devicePixelRatio || 1);
+  if (treeCtx) treeCtx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+}
+
+function startTreeLoop() {
+  if (!treeCanvas || !treeCtx || !treeImgLoaded) return;
+  const w = treeCanvas.offsetWidth;
+  const h = treeCanvas.offsetHeight;
+
+  function drawTree() {
+    treeCtx.clearRect(0, 0, treeCanvas.width, treeCanvas.height);
+    treeCtx.save();
+
+    // Subtle glow pulse
+    treeGlow += 0.008 * treeGlowDir;
+    if (treeGlow > 1) treeGlowDir = -1;
+    if (treeGlow < 0) treeGlowDir = 1;
+    const glowAlpha = 0.6 + 0.4 * treeGlow;
+    treeCtx.globalAlpha = glowAlpha;
+
+    // Draw tree centered, filling hero
+    const imgAspect = treeImg.width / treeImg.height;
+    const drawH = h * 1.1;
+    const drawW = drawH * imgAspect;
+    const drawX = (w - drawW) / 2;
+    const drawY = (h - drawH) / 2 + (h * 0.08);
+
+    treeCtx.drawImage(treeImg, drawX, drawY, drawW, drawH);
+    treeCtx.restore();
+    requestAnimationFrame(drawTree);
+  }
+  drawTree();
+}
+
+// ===== INIT =====
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+generateStars();
+
+Promise.all([
+  document.fonts.ready,
+  new Promise(r => { if (treeImgLoaded) r(); else treeImg.onload = () => { treeImgLoaded = true; r(); }; })
+]).then(() => {
+  setTimeout(startTreeLoop, 200);
+  setTimeout(animateHero, 400);
+});
+</script>
+</body>
+</html>
