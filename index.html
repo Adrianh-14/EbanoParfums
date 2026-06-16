@@ -140,15 +140,12 @@ nav.scrolled {
   overflow: hidden;
   min-height: 600px;
 }
-.hero-bg-img {
+#treeCanvas {
   position: absolute;
   inset: 0;
+  width: 100%; height: 100%;
+  display: block;
   z-index: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  overflow: hidden;
 }
 .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
 .hero-overlay {
@@ -158,14 +155,12 @@ nav.scrolled {
   z-index: 1;
   pointer-events: none;
 }
-#heroCanvas {
+#treeCanvas {
   position: absolute;
   inset: 0;
   width: 100%; height: 100%;
+  display: block;
   z-index: 1;
-  pointer-events: none;
-  opacity: 0.18;
-  mix-blend-mode: screen;
 }
 .hero-content {
   position: absolute;
@@ -175,26 +170,11 @@ nav.scrolled {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 24px;
-}
-/*.hero-logo-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-}*/
-.hero-monogram-bg {
-  position: absolute;
-  font-family: var(--font-display);
-  font-size: clamp(180px, 30vw, 400px);
-  font-weight: 700;
-  color: var(--gold);
-  opacity: 0.03;
+  padding-top: 16vh;
   pointer-events: none;
-  user-select: none;
-  z-index: -1;
+  text-align: center;
 }
+#heroLogoWrapper { opacity: 0; }
 .hero-scrim {
   position: absolute;
   inset: 0;
@@ -219,18 +199,6 @@ nav.scrolled {
   max-width: clamp(280px, 45vw, 600px);
   height: auto;
   width: 100%;
-}
-.hero-tagline {
-  font-family: var(--font-body);
-  font-size: clamp(11px, 1.4vh, 14px);
-  font-weight: 300;
-  letter-spacing: 0.3em;
-  color: var(--ivory);
-  opacity: 0;
-  margin-top: 32px;
-  transform: translateY(15px);
-  position: relative;
-  z-index: 1;
 }
 .hero-sub {
   font-family: var(--font-body);
@@ -280,9 +248,11 @@ nav.scrolled {
 }
 .hero-cta:hover { background: var(--gold-light); transform: scale(1.03); box-shadow: 0 0 40px rgba(200,163,90,0.2); }
 
-/* Gold glow accent behind monogram */
+/* Gold glow accent behind logo */
 .hero-glow {
   position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
   width: 300px; height: 300px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(200,163,90,0.08) 0%, transparent 70%);
@@ -508,7 +478,6 @@ nav.scrolled {
   box-shadow: 0 20px 60px rgba(200,163,90,0.05);
 }
 .product-card-image { width: 180px; height: 240px; margin: 0 auto 28px; position: relative; overflow: hidden; border-radius: 10px; }
-.product-card-image svg { width: 100%; height: 100%; }
 .product-card-image img {
   width: 100%; height: 100%;
   object-fit: cover;
@@ -954,32 +923,6 @@ footer {
   margin-top: 12px;
   letter-spacing: 0.03em;
 }
-
-/* ===== FOOTER ===== */
-footer {
-  background: var(--black-absolute);
-  border-top: 1px solid rgba(200,163,90,0.05);
-  padding: 80px 48px 32px;
-}
-.footer-grid {
-  max-width: 1280px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 60px;
-  margin-bottom: 60px;
-}
-.footer-brand .footer-logo { margin-bottom: 16px; }
-.footer-brand .footer-logo img { height: 32px; width: auto; display: block; }
-.footer-brand p {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 300;
-  line-height: 1.8;
-  color: var(--ivory);
-  opacity: 0.3;
-  max-width: 280px;
-}
 .footer-col h4 {
   font-family: var(--font-display);
   font-size: 10px;
@@ -1001,6 +944,47 @@ footer {
   transition: color 0.3s var(--transition-smooth);
 }
 .footer-col a:hover { color: var(--gold); opacity: 1; }
+.footer-brand .footer-socials {
+  display: flex;
+  gap: 14px;
+  margin-top: 24px;
+}
+.footer-social-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,163,90,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ivory);
+  opacity: 0.25;
+  text-decoration: none;
+  transition: all 0.5s var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px);
+}
+.footer-social-icon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,163,90,0.15) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s var(--transition-smooth);
+}
+.footer-social-icon:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  opacity: 1;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(200,163,90,0.08);
+}
+.footer-social-icon:hover::before { opacity: 1; }
+.footer-social-icon svg { width: 18px; height: 18px; transition: transform 0.5s var(--transition-smooth); }
+.footer-social-icon:hover svg { transform: scale(1.1); }
 .footer-bottom {
   max-width: 1280px;
   margin: 0 auto;
@@ -1018,18 +1002,6 @@ footer {
   opacity: 0.2;
   letter-spacing: 0.03em;
 }
-.footer-socials { display: flex; gap: 24px; }
-.footer-socials a {
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 300;
-  color: var(--ivory);
-  opacity: 0.25;
-  text-decoration: none;
-  letter-spacing: 0.1em;
-  transition: color 0.3s var(--transition-smooth);
-}
-.footer-socials a:hover { color: var(--gold); opacity: 1; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 968px) {
@@ -1055,7 +1027,6 @@ footer {
   footer { padding: 60px 24px 24px; }
   .exclusivity-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 28px; }
-  .newsletter-form { flex-direction: column; }
   .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
 }
 </style>
@@ -1079,11 +1050,9 @@ footer {
 
 <!-- ===== HERO ===== -->
 <section id="hero">
-  <div class="hero-bg-img">
-    <img src="gif.gif" alt="" class="hero-img">
-  </div>
+  <canvas id="treeCanvas"></canvas>
   <div class="hero-overlay"></div>
-  <canvas id="heroCanvas"></canvas>
+  <canvas id="treeCanvas"></canvas>
   <div class="hero-gold-line top"></div>
   <div class="hero-gold-line bottom"></div>
   <div class="hero-stars" id="heroStars"></div>
@@ -1091,7 +1060,6 @@ footer {
 
   <div class="hero-content">
     <div class="hero-glow" id="heroGlow"></div>
-    <div class="hero-monogram-bg" id="heroMonogramBg">É</div>
     <div class="hero-logo-wrapper" id="heroLogoWrapper">
       <img src="logo.png" alt="ÉBANO PARFUMS" class="hero-logo-img" id="heroLogo">
     </div>
@@ -1166,26 +1134,9 @@ footer {
       <div class="product-card-desc">Aromas delicados, intensos y memorables para mujeres que desean expresar su personalidad única.</div>
       <div class="product-card-accent"></div>
     </div>
-    <div class="product-card" data-index="2">
-      <div class="product-card-image">
-        <svg viewBox="0 0 100 180" fill="none">
-          <rect x="25" y="25" width="50" height="130" rx="10" fill="#1A1A1D" stroke="#C8A35A" stroke-width="0.4" opacity="0.4"/>
-          <rect x="28" y="28" width="44" height="124" rx="8" fill="url(#grad3)" opacity="0.2"/>
-          <rect x="38" y="15" width="24" height="14" rx="4" fill="#1A1A1D" stroke="#C8A35A" stroke-width="0.3" opacity="0.3"/>
-          <circle cx="50" cy="33" r="5" fill="#C8A35A" opacity="0.12"/>
-          <line x1="35" y1="155" x2="65" y2="155" stroke="#C8A35A" stroke-width="0.3" opacity="0.15"/>
-          <rect x="40" y="95" width="20" height="1" fill="#C8A35A" opacity="0.08"/>
-          <line x1="45" y1="160" x2="45" y2="168" stroke="#C8A35A" stroke-width="0.3" opacity="0.12"/>
-          <line x1="50" y1="160" x2="50" y2="170" stroke="#C8A35A" stroke-width="0.3" opacity="0.12"/>
-          <line x1="55" y1="160" x2="55" y2="167" stroke="#C8A35A" stroke-width="0.3" opacity="0.12"/>
-          <defs>
-            <linearGradient id="grad3" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#C8A35A" stop-opacity="0.22"/>
-              <stop offset="50%" stop-color="#C8A35A" stop-opacity="0.05"/>
-              <stop offset="100%" stop-color="#C8A35A" stop-opacity="0.14"/>
-            </linearGradient>
-          </defs>
-        </svg>
+    <div class="product-card product-card--has-photo" data-index="2">
+      <div class="product-card-image product-card-image--photo">
+        <img src="unisex.jpg" alt="Fragancias Unisex" loading="lazy">
       </div>
       <div class="product-card-name">FRAGANCIAS UNISEX</div>
       <div class="product-card-family">Versatilidad sin límites</div>
@@ -1310,6 +1261,25 @@ footer {
       <div class="footer-logo"><img src="logo.png" alt="ÉBANO PARFUMS"></div>
       <p>Elegancia en cada fragancia. Perfumes originales al detalle y al por mayor.</p>
       <div class="footer-location">✦ La Altagracia, República Dominicana</div>
+      <div class="footer-socials" id="footerSocials">
+        <a href="#" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="5"/>
+            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="#" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+          </svg>
+        </a>
+        <a href="#" target="_blank" rel="noopener" class="footer-social-icon" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+            <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+          </svg>
+        </a>
+      </div>
     </div>
     <div class="footer-col">
       <h4>Explorar</h4>
@@ -1332,11 +1302,6 @@ footer {
   </div>
   <div class="footer-bottom">
     <span>&copy; 2026 ÉBANO PARFUMS. Todos los derechos reservados.</span>
-    <div class="footer-socials">
-      <a href="#" target="_blank">Instagram</a>
-      <a href="#" target="_blank">Facebook</a>
-      <a href="#" target="_blank">Pinterest</a>
-    </div>
   </div>
 </footer>
 
@@ -1483,6 +1448,14 @@ const sectionObserver = new IntersectionObserver((entries) => {
         easing: 'easeOutExpo',
       });
     }
+    if (el.id === 'exclusividadHeader') {
+      anime({
+        targets: el.querySelectorAll('.section-label, .section-title'),
+        opacity: [0, 1], translateY: [30, 0],
+        delay: anime.stagger(200), duration: 800,
+        easing: 'easeOutExpo',
+      });
+    }
     if (el.id === 'exclusividadContent') {
       anime({ targets: el, opacity: [0, 1], translateY: [30, 0], duration: 800, easing: 'easeOutExpo' });
     }
@@ -1524,9 +1497,22 @@ const sectionObserver = new IntersectionObserver((entries) => {
     }
     if (el.id === 'footerEl') {
       anime({
-        targets: el.querySelectorAll('.footer-grid > div, .footer-bottom'),
+        targets: el.querySelectorAll('.footer-grid > div'),
         opacity: [0, 1], translateY: [20, 0],
         delay: anime.stagger(100), duration: 800,
+        easing: 'easeOutExpo',
+      });
+      anime({
+        targets: el.querySelectorAll('.footer-social-icon'),
+        opacity: [0, 1], translateY: [16, 0],
+        delay: anime.stagger(120, { start: 600 }),
+        duration: 600,
+        easing: 'easeOutExpo',
+      });
+      anime({
+        targets: el.querySelector('.footer-bottom'),
+        opacity: [0, 1], translateY: [20, 0],
+        delay: 900, duration: 800,
         easing: 'easeOutExpo',
       });
     }
@@ -1535,22 +1521,22 @@ const sectionObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
-// ===== PRODUCT CARD HOVER =====
-document.querySelectorAll('.product-card').forEach(card => {
-  card.addEventListener('mouseenter', () => {
-    anime({
-      targets: card.querySelector('.product-card-accent'),
-      width: [24, 48], opacity: [0.15, 0.5],
-      duration: 400, easing: 'easeOutExpo',
-    });
-  });
-  card.addEventListener('mouseleave', () => {
-    anime({
-      targets: card.querySelector('.product-card-accent'),
-      width: [48, 24], opacity: [0.5, 0.15],
-      duration: 400, easing: 'easeOutExpo',
-    });
-  });
+// ===== MOBILE MENU TOGGLE =====
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+menuToggle.addEventListener('click', () => {
+  const open = navLinks.style.display === 'flex';
+  navLinks.style.display = open ? '' : 'flex';
+  navLinks.style.flexDirection = 'column';
+  navLinks.style.position = 'absolute';
+  navLinks.style.top = '100%';
+  navLinks.style.left = '0';
+  navLinks.style.right = '0';
+  navLinks.style.background = 'var(--black-absolute)';
+  navLinks.style.padding = '24px 32px';
+  navLinks.style.gap = '16px';
+  navLinks.style.borderTop = '1px solid rgba(200,163,90,0.08)';
+  menuToggle.textContent = open ? '✕' : '✕';
 });
 
 // ===== NAV SCROLL =====
@@ -1567,62 +1553,85 @@ window.addEventListener('scroll', () => {
   }
 }, { passive: true });
 
-// ===== OBSERVE ALL =====
-document.querySelectorAll('#historyImage, #historyText, #historyImageInner, #collectionHeader, .product-card, #mayoristasHeader, #mayoristasText, #mayoristasBenefits, .exclusivity-card, #exclusividadContent, #contactoContent, #footerEl').forEach(el => {
-  sectionObserver.observe(el);
-});
-
 // ===== TREE CANVAS =====
-const treeCanvas = document.getElementById('heroCanvas');
-const treeCtx = treeCanvas ? treeCanvas.getContext('2d') : null;
 const treeImg = new Image();
 let treeImgLoaded = false;
-let treeGlow = 0;
-let treeGlowDir = 1;
-
 treeImg.onload = () => { treeImgLoaded = true; };
 treeImg.src = 'tree.png';
 
-function resizeCanvas() {
-  if (!treeCanvas) return;
-  treeCanvas.width = treeCanvas.offsetWidth * (window.devicePixelRatio || 1);
-  treeCanvas.height = treeCanvas.offsetHeight * (window.devicePixelRatio || 1);
-  if (treeCtx) treeCtx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+const treeCanvas = document.getElementById('treeCanvas');
+const treeCtx = treeCanvas.getContext('2d');
+let treeMouseX = 0.5, treeMouseY = 0.5;
+
+function resizeTreeCanvas() {
+  const r = document.getElementById('hero').getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  treeCanvas.width = r.width * dpr;
+  treeCanvas.height = r.height * dpr;
+  treeCanvas.style.width = r.width + 'px';
+  treeCanvas.style.height = r.height + 'px';
 }
+
+document.addEventListener('mousemove', e => {
+  treeMouseX = e.clientX / window.innerWidth;
+  treeMouseY = e.clientY / window.innerHeight;
+});
 
 function startTreeLoop() {
-  if (!treeCanvas || !treeCtx || !treeImgLoaded) return;
-  const w = treeCanvas.offsetWidth;
-  const h = treeCanvas.offsetHeight;
+  let startTime = 0;
+  function draw(time) {
+    if (!startTime) startTime = time;
+    const elapsed = time - startTime;
+    const t = (elapsed % 20000) / 20000;
+    const zoom = 1 + t * 0.03;
+    const px = (treeMouseX - 0.5) * 3;
+    const py = (treeMouseY - 0.5) * 3;
 
-  function drawTree() {
-    treeCtx.clearRect(0, 0, treeCanvas.width, treeCanvas.height);
-    treeCtx.save();
+    const dpr = window.devicePixelRatio || 1;
+    treeCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const w = treeCanvas.width / dpr;
+    const h = treeCanvas.height / dpr;
 
-    // Subtle glow pulse
-    treeGlow += 0.008 * treeGlowDir;
-    if (treeGlow > 1) treeGlowDir = -1;
-    if (treeGlow < 0) treeGlowDir = 1;
-    const glowAlpha = 0.6 + 0.4 * treeGlow;
-    treeCtx.globalAlpha = glowAlpha;
+    treeCtx.fillStyle = '#0B0B0B';
+    treeCtx.fillRect(0, 0, w, h);
 
-    // Draw tree centered, filling hero
-    const imgAspect = treeImg.width / treeImg.height;
-    const drawH = h * 1.1;
-    const drawW = drawH * imgAspect;
-    const drawX = (w - drawW) / 2;
-    const drawY = (h - drawH) / 2 + (h * 0.08);
+    if (treeImgLoaded) {
+      treeCtx.save();
+      treeCtx.globalAlpha = 0.18;
+      treeCtx.translate(px, py);
+      const ix = treeImg.naturalWidth, iy = treeImg.naturalHeight;
+      const s = Math.max(w / ix, h / iy) * zoom;
+      treeCtx.drawImage(treeImg, (w - ix * s) / 2, (h - iy * s) / 2, ix * s, iy * s);
+      treeCtx.restore();
 
-    treeCtx.drawImage(treeImg, drawX, drawY, drawW, drawH);
-    treeCtx.restore();
-    requestAnimationFrame(drawTree);
+      const vg = treeCtx.createRadialGradient(w * 0.5, h * 0.4, h * 0.05, w * 0.5, h * 0.5, h * 0.85);
+      vg.addColorStop(0, 'rgba(11,11,11,0)');
+      vg.addColorStop(0.3, 'rgba(11,11,11,0.2)');
+      vg.addColorStop(0.6, 'rgba(11,11,11,0.6)');
+      vg.addColorStop(1, 'rgba(11,11,11,0.95)');
+      treeCtx.fillStyle = vg;
+      treeCtx.fillRect(0, 0, w, h);
+
+      const gg = treeCtx.createRadialGradient(w * 0.5, h * 0.45, 0, w * 0.5, h * 0.45, h * 0.35);
+      gg.addColorStop(0, 'rgba(200,163,90,0.03)');
+      gg.addColorStop(0.5, 'rgba(200,163,90,0.01)');
+      gg.addColorStop(1, 'rgba(200,163,90,0)');
+      treeCtx.fillStyle = gg;
+      treeCtx.fillRect(0, 0, w, h);
+    }
+    requestAnimationFrame(draw);
   }
-  drawTree();
+  requestAnimationFrame(draw);
 }
 
+// ===== OBSERVE ALL =====
+document.querySelectorAll('#historyImage, #historyText, #historyImageInner, #collectionHeader, .product-card, #mayoristasHeader, #mayoristasText, #mayoristasBenefits, #exclusividadHeader, .exclusivity-card, #exclusividadContent, #contactoContent, #footerEl').forEach(el => {
+  sectionObserver.observe(el);
+});
+
 // ===== INIT =====
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
+window.addEventListener('resize', resizeTreeCanvas);
+resizeTreeCanvas();
 generateStars();
 
 Promise.all([
