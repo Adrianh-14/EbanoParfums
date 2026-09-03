@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ebanoparfums.com/sitemap.xml
+Sitemap: https://www.ebanoparfums.com/sitemap.xml
